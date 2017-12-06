@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{%  block title %} 服务器管理列表 {% endblock %}
+
+{% block content %}
+  <table  class="table table-striped table-bordered" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+            <td align="center">ID</td>
+            <td align="center">IP地址</td>
+            <td align="center">MAC地址</td>
+            <td align="center">主机名</td>
+            <td align="center">用户名</td>
+            <td align="center">设备类型</td>
+            <td align="center">存放位置</td>
+            <td align="center">系统类型</td>
+            <td align="center">备注</td>
+
+        </tr>
+      </thead>
+          {% for host in servers %}
+        <tr>
+
+            <td >{{ host.id }}</td>
+            <td>{{ host.ip }}</td>
+            <td>{{ host.Cmac }}</td>
+            <td>{{ host.Cname}}</td>
+            <td>{{ host.user}}</td>
+            <td>{{ host.server}}</td>
+            <td>{{ host.position}}</td>
+            <td>{{ host.OS}}</td>
+            {# <td>{{ host.remark }}</td> #}
+            <td>
+                <a href="{% url "server_edit"  id=host.id edit='1' %}" class="btn btn-info btn-sm">编辑</a>
+                <a href="/asset/delete/?id={{ host.id }}&delete=1" class="btn btn-danger btn-sm" style="color:white" role="button">删除</a>
+            </td>
+        </tr>
+          {% endfor %}
+  </table>
+        <div class="row">
+          <div style="text-align: center">
+             <div class="dataTables_paginate paging_simple_numbers " id="exmaple_paginate">
+
+               {% if servers.has_previous %}
+                    <a href="?page={{ servers.previous_page_number }}">上一页</a>
+               {% endif %}
+               <span class="current">
+                    第{{ servers.number }}页，共{{ servers.paginator.num_pages }}页
+               </span>
+               {% if servers.has_next %}
+                    <a href="?page={{ servers.next_page_number }}">下一页</a>
+               {% endif %}
+            </div>
+          </div>
+       </div>
+{% endblock %}

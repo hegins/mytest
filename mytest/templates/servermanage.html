@@ -1,0 +1,70 @@
+{% extends "serverlist.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
+
+<form class="form-horizontal form-border" id="form" method="post" action=".">
+       {% csrf_token %}
+       <div class="form-group">
+             <label class="col-sm-3 control-label">IP地址</label>
+             <div class="col-sm-6">
+             {{ form.ip }}
+             {{ form.ip.errors }}
+             </div>
+       </div>
+       <div class="form-group">
+             <label class="col-sm-3 control-label">MAC地址</label>
+             <div class="col-sm-6">
+             {{ form.Cmac }}
+             {{ form.Cmac.errors }}
+             </div>
+        </div>
+        <div class="form-group">
+             <label class="col-sm-3 control-label">主机名</label>
+             <div class="col-sm-6">
+             {{ form.Cname }}
+             {{ form.Cname.errors }}
+             </div>
+        </div>
+        <div class="form-group">
+             <label class="col-sm-3 control-label">用户</label>
+             <div class="col-sm-6">
+             {{ form.user }}
+            {{ form.user.errors }}
+             </div>
+        </div>
+        <div class="form-group">
+             <label class="col-sm-3 control-label">位置</label>
+             <div class="col-sm-6">
+             {{ form.position }}
+             {{ form.position.errors }}
+             </div>
+        </div>
+        <div class="form-group">
+             <label class="col-sm-3 control-label">设备类型</label>
+             <div class="col-sm-6">
+             {{ form.server }}
+                {{ form.server.errors }}
+             </div>
+        </div>
+        <div class="form-group">
+             <label class="col-sm-3 control-label">操作系统</label>
+             <div class="col-sm-6">
+             {{ form.OS }}
+                {{ form.OS.errors }}
+              </div>
+         </div>
+         <div class="col-sm-offset-8 col-sm-10">
+             {% ifequal action 'add' %}
+                 <button type="submit" class="btn btn-primary">添加</button>
+             {% endifequal %}
+             {% ifequal action 'edit' %}
+                 <button type="submit" class="btn btn-primary" name="operate" value="update">更新</button>
+             {% endifequal %}
+        </div>
+
+</form>
+
+
+{% endblock %}

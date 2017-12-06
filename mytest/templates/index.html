@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>cyberway</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script>
+function checkUser()
+{
+
+   var username = document.getElementById("username").value;
+   var hostname = document.getElementById("hostname").value;
+   if(username == ""  ){
+     alert("用户名不能为空");
+     return false;
+   }
+   if(hostname == ""  ){
+    alert("主机名不能为空");
+     return false;
+   }
+   
+var xmlhttp;    
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+xmlhttp.open("GET","checkUser.php?username="+username+"&hostname="+hostname,false);
+xmlhttp.send();
+	var txt=xmlhttp.responseText;
+	if(txt == 0) { 
+	    document.getElementById("txtHint").innerHTML="用户名或主机名不存在";
+            alert("用户名或主机名不存在");
+		return false;
+	}
+	if(txt == 1) {
+	    return true;
+	}
+        if(txt == 2) {
+             document.getElementById("txtHint").innerHTML="此计算机已经在线，无须再次开机";
+             alert("此计算机已经在线");
+             return false;
+        }
+
+
+return false;
+}
+</script>
+   
+</head>
+<body>
+  <section class="container">
+    <div class="login">
+      <h1>远程开机</h1>
+      <form id="fm" method="GET" action="bootstrap.php" onsubmit="return checkUser()">
+        <p><input id="username" type="text" name="username" value="" placeholder="用户名"></p>
+        <p><input id="hostname" type="text" name="hostname" value="" placeholder="主机名"></p>
+        <p class="txt">
+          <label>
+            <p name="remember_me" ><font color="#FF0000"id="txtHint"></font> </p>
+          </label>
+        </p>
+        <p class="submit" ><input type="submit" name="commit"  value="开机"></p>
+      </form>
+    </div>
+  </section>
+</body>
+</html>
