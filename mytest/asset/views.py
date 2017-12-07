@@ -23,37 +23,32 @@ def server_list(request):
 
     return render(request, "serverlist.html", {'servers':servers, 'page':page, 'paginator':paginator})
 
-def server_manage(request):
-    print('aaa')
-    if request.method=='GET':
-        id=request.GET.get('id')
+def ServerManage(request,id=None,delete=None):
+    if not id :     ##当前ID为空时，该请求是传统硬编码方式请求，故需要手动获取参数值
+        id = request.GET.get('id')
+        delete=request.GET.get('delete')
+    if request.method == 'GET':
+       # id=request.GET['id']
         server=get_object_or_404(serverlist,pk=id)
-        edit=request.GET['edit']
-        delete=request.GET['delete']
-        if edit:
-            form=ServerListForm(instance=server)
-            return render(request,'servermanage.html',{"form":form, "action":'edit'})
+
+        #delete=request.GET['delete']
 
         if delete:
             server.delete()
             return HttpResponseRedirect(reverse(server_list))
         else:
-            pass
+            form = ServerListForm(instance=server)
+            return render(request, 'servermanage.html', {"form": form, "action": 'edit'})
 
     if request.method=='POST':
         serverhost = get_object_or_404(serverlist, pk=id)
-        id=request.POST.get('id')
-        print(id)
+
         form= ServerListForm(request.POST,instance=serverhost)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse(server_list))
     else:
         pass
-
-
-
-
 
 
 

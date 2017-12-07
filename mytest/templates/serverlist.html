@@ -20,7 +20,7 @@
           {% for host in servers %}
         <tr>
 
-            <td >{{ host.id }}</td>
+            <td >{{ forloop.counter}}</td>
             <td>{{ host.ip }}</td>
             <td>{{ host.Cmac }}</td>
             <td>{{ host.Cname}}</td>
@@ -30,7 +30,7 @@
             <td>{{ host.OS}}</td>
             {# <td>{{ host.remark }}</td> #}
             <td>
-                <a href="{% url "server_edit"  id=host.id edit='1' %}" class="btn btn-info btn-sm">编辑</a>
+                <a href="{% url "server_edit"  id=host.id %}" class="btn btn-info btn-sm">编辑</a>
                 <a href="/asset/delete/?id={{ host.id }}&delete=1" class="btn btn-danger btn-sm" style="color:white" role="button">删除</a>
             </td>
         </tr>
