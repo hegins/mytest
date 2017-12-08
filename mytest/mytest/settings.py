@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #'django-bootstrap-form-3.3',
     'bootstrapform',
     'asset',
+    'wol',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>cyberway</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+   <script>
+function checkUser()
+{
+
+   var user = document.getElementById("user").value;
+   var Cname = document.getElementById("Cname").value;
+   var ip = document.getElementById("ip").value;
+   var Cmac = document.getElementById("Cmac").value;
+   if(user == ""  ){
+     alert("用户名不能为空");
+     return false;
+   }
+   if(Cname == ""  ){
+    alert("主机名不能为空");
+     return false;
+   }
+      if(ip == ""  ){
+    alert("IP地址不能为空");
+     return false;
+   }
+      if(Cmac == ""  ){
+    alert("mac地址不能为空");
+     return false;
+   }
+   if(!isValidIP(ip)){
+	alert("IP地址格式不正确");
+	return false;
+   }
+   if(!isValidMac(Cmac)){
+	alert("MAC地址格式不正确");
+	return false;
+   }
+   return true;
+}
+
+function isValidIP(ip) {
+    var regip = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/
+    return regip.test(ip);
+} 
+
+function isValidMac(Cmac) {
+    var regmac = /^[A-F0-9]{2}(-[A-F0-9]{2}){5}$/
+    return regmac.test(Cmac);	
+} 
+</script>
+</head>
+<body>
+  <section class="container">
+    <div class="login">
+      <h1>主机备案</h1>
+      <form method="GET" action="inserttest.php" onsubmit="return checkUser()">
+		<p><input id="ip" type="text" name="ip" value="" placeholder="IP地址"></p>
+		<p><input id="Cmac" type="text" name="Cmac" value="" placeholder="MAC地址"></p>
+		<p><input id="Cname" type="text" name="Cname" value="" placeholder="主机名"></p>
+		<p><input id="user" type="text" name="user" value="" placeholder="用户名"></p>
+		<p><input id="position" type="text" name="position" value="" placeholder="位置信息"></p>
+		<p><input id="server" type="text" name="server" value="" placeholder="是否是服务器"></p>
+	   <p><input id="OS" type="text" name="OS" value="" placeholder="操作系统"></p>
+        <p class="submit"><input type="submit" name="commit" value=" 添加记录"></p>
+      </form>
+    </div>
+  </section>
+</body>
+</html>
