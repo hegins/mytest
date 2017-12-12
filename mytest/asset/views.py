@@ -24,7 +24,7 @@ def server_list(request):
     return render(request, "serverlist.html", {'servers':servers, 'page':page, 'paginator':paginator})
 
 def ServerManage(request,id=None,delete=None):
-    if not id :     ##当前ID为空时，该请求是传统硬编码方式请求，故需要手动获取参数值
+    if not id :     ##当前ID为空时，该请求是传统硬编码方式请求，需要手动获取参数值
         id = request.GET.get('id')
         delete=request.GET.get('delete')
     if request.method == 'GET':
@@ -50,8 +50,6 @@ def ServerManage(request,id=None,delete=None):
     else:
         pass
 
-
-
 def host_list(request):
     user = request.user
     hosts= userhostlist.objects.all().order_by('id')
@@ -66,3 +64,10 @@ def host_list(request):
     except :
         hostlist=paginator.page(paginator.num_pages)
     return render(request,'userhostlist.html', {'hostlist':hostlist,'page':page,'paginator':paginator})
+
+def PowerOn(request):
+    if request.method == 'GET':
+        return render(request,'addhost.html')
+
+    if request.method == 'POST':
+        return render(request,'addhost.html')
