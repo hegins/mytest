@@ -23,18 +23,20 @@ from wol.views import  *
 # from mytestapp.views import home
 
 urlpatterns = [
-    url(r'^admins/$', site.urls),
-	url(r'^$', index),
+    url(r'^admins/', site.urls),
+
 	url(r'^admin/$', admin, name='index'),
 	url(r'^account/', include('account.urls')),
 
+	# 远程开机模块
+	url(r'^$', Index),
+	url(r'^wol/$', PowerOn, name='PowerOn'),
 	#asset主机记录信息
 	url(r'^asset/$', server_list, name='server_list'),
 	url(r'^asset/(?P<id>\d+)/$',ServerManage, name="server_edit"),
 	url(r'^asset/delete/$', ServerManage,name='server_delete'),
 	url(r'^hostlist/',host_list, name='host_list'),
 
-	#远程开机模块
-	url(r'^wol/$',PowerOn,name='PowerOn')
+
 	
 ]

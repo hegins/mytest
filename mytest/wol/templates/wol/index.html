@@ -24,35 +24,7 @@ function checkUser()
      return false;
    }
    
-var xmlhttp;    
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
 
-xmlhttp.open("GET","checkUser.php?username="+username+"&hostname="+hostname,false);
-xmlhttp.send();
-	var txt=xmlhttp.responseText;
-	if(txt == 0) { 
-	    document.getElementById("txtHint").innerHTML="用户名或主机名不存在";
-            alert("用户名或主机名不存在");
-		return false;
-	}
-	if(txt == 1) {
-	    return true;
-	}
-        if(txt == 2) {
-             document.getElementById("txtHint").innerHTML="此计算机已经在线，无须再次开机";
-             alert("此计算机已经在线");
-             return false;
-        }
-
-
-return false;
 }
 </script>
    
@@ -61,7 +33,8 @@ return false;
   <section class="container">
     <div class="login">
       <h1>远程开机</h1>
-      <form id="fm" method="GET" action="bootstrap.php" onsubmit="return checkUser()">
+      <form id="fm" method="POST" action="" onsubmit="return checkUser()">
+          {% csrf_token %}
         <p><input id="username" type="text" name="username" value="" placeholder="用户名"></p>
         <p><input id="hostname" type="text" name="hostname" value="" placeholder="主机名"></p>
         <p class="txt">
