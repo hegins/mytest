@@ -33,7 +33,7 @@ function checkUser()
   <section class="container">
     <div class="login">
       <h1>远程开机</h1>
-      <form id="fm" method="POST" action="" onsubmit="return checkUser()">
+      <form id="fm" method="POST" action="." onsubmit="return checkUser()">
           {% csrf_token %}
         <p><input id="username" type="text" name="username" value="" placeholder="用户名"></p>
         <p><input id="hostname" type="text" name="hostname" value="" placeholder="主机名"></p>
