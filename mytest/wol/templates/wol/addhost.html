@@ -59,7 +59,8 @@ function isValidMac(mac) {
   <section class="container">
     <div class="login">
       <h1>主机备案</h1>
-      <form method="GET" action="post" onsubmit="return checkUser()">
+      <form method="post" action="" onsubmit="return checkUser()">
+          {% csrf_token %}
         <p><input id="username" type="text" name="username" value="" placeholder="用户名"></p>
         <p><input id="hostname" type="text" name="hostname" value="" placeholder="主机名"></p>
 		<p><input id="ipaddress" type="text" name="ip" value="" placeholder="IP地址"></p>

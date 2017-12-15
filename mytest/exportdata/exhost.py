@@ -18,7 +18,8 @@ def main():
  for line in f:
     print(line)
     parts= line.split('|')
-    userhostlist.objects.create(ip=parts[1], mac=parts[2], hostname=parts[4],username=parts[3])
+    hostname=parts[4].replace('\n','')
+    userhostlist.objects.create(ip=parts[1], mac=parts[2], hostname=hostname,username=parts[3])
 
  f.close()
 

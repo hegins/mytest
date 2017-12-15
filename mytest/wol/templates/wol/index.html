@@ -39,7 +39,13 @@ function checkUser()
         <p><input id="hostname" type="text" name="hostname" value="" placeholder="主机名"></p>
         <p class="txt">
           <label>
-            <p name="remember_me" ><font color="#FF0000"id="txtHint"></font> </p>
+            <p name="remember_me" style="color: #FF0000; font-weight:500;">
+                {% if error %}
+                     {% for err in error %}
+                        {{ err }}
+                    {% endfor %}
+                {% endif %}
+           </p>
           </label>
         </p>
         <p class="submit" ><input type="submit" name="commit"  value="开机"></p>

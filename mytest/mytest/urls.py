@@ -31,6 +31,8 @@ urlpatterns = [
 	# 远程开机模块
 	url(r'^$', Index),
 	url(r'^wol/$', PowerOn, name='PowerOn'),
+	url(r'^wol/addhost/$',AddHost,name='addhost'),
+	url(r'^wol/addserver/$',AddServer,name='addserver'),
 	#asset主机记录信息
 	url(r'^asset/$', server_list, name='server_list'),
 	url(r'^asset/(?P<id>\d+)/$',ServerManage, name="server_edit"),
